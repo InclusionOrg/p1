@@ -1,0 +1,32 @@
+{
+  "name": "simple-node-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon",
+    "migrate": "sequelize-cli db:migrate",
+    "nukedb": "rm -f *.sqlite3",
+    "reset": "npm run nukedb && npm run setup && npm run dev",
+    "seed": "npx sequelize-cli db:seed:all",
+    "seedTestData": "rm -f *.test.sqlite3 && sequelize-cli db:migrate && sequelize-cli db:seed:all",
+    "setup": "npm run migrate && npm run seed",
+    "test": "NODE_ENV=test npm run seedTestData && npx jest",
+    "lint": "eslint ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "sequelize": "^5.21.3",
+    "sqlite3": "^4.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "jest": "^25.1.0",
+    "nodemon": "^2.0.2",
+    "sequelize-cli": "^5.5.1"
+  }
+}
