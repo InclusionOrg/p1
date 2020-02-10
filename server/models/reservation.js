@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
       return await this.findAll();
     }
 
+    static async allRaw() {
+      return this.findAll({ raw: true });
+    }
+
     static async add(reservation) {
       return this.create({
         name: reservation.name,

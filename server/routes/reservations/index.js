@@ -6,7 +6,7 @@ const { getAvailability } = require('./utils');
 // GET all reservations
 router.get('/', async (req, res) => {
   // const reservations = await Reservation.all();
-  const reservations = await Reservation.findAll({ raw: true });
+  const reservations = await Reservation.allRaw();
   // console.log('reservations:', reservations);
 
   const available = getAvailability(reservations);

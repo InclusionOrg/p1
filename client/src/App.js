@@ -4,10 +4,6 @@ import styled from 'styled-components';
 import './App.css';
 import { getFormattedReservations, postReservation } from './utils';
 
-const Input = styled.input`
-  padding: 0.5em;
-`;
-
 const BookedReservations = styled.div`
   display: flex;
   flex-direction: column;
@@ -19,6 +15,10 @@ const ReservationForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const Input = styled.input`
+  padding: 0.5em;
 `;
 
 const ButtonContainer = styled.div`
@@ -72,13 +72,13 @@ class App extends React.Component {
       resName: '',
     });
 
-    this.refreshReservations()
+    this.refreshReservations();
   };
 
   render() {
     return (
       <div className="App">
-        <div>Janky Meats</div>
+        <div>{'Janky Meats'}</div>
 
         <BookedReservations>
           <div>RESERVATIONS</div>
