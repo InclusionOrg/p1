@@ -1,6 +1,7 @@
 # project-1
 
 frontend: react
+
 backend: node
 
 for speed of development, this solution only supports 2 tables (not 10).
