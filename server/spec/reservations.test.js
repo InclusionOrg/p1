@@ -32,5 +32,12 @@ test('should return correct number of reservations given current booked reservat
   const available = getAvailability(testBookedReservations);
 
   expect(available['13:00']).toBe(1);
-  expect(available['13:30']).toBe(1);
+});
+
+test('should return correct number of subsequent reservations given current booked reservations', () => {
+  const available = getAvailability(testBookedReservations);
+
+  expect(available['13:00']).toBe(1);
+  expect(available['13:30']).toBe(0);
+  expect(available['14:00']).toBe(1);
 });
