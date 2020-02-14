@@ -4,22 +4,23 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [10.x]
-
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: cd server && npm install
-    - run: cd server && npm test
-    - run: cd client && npm install
-    - run: cd client && npm test
+    - run: cd server && npm install && npm test
       env:
         CI: true
+    - name: Deploy to Heroku
+      env:
+        HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN }}
+        HEROKU_APP_NAME: "inclusion-p2"
+      if: github.ref == 'refs/heads/master' && job.status == 'success'
+      # run: git subtree push --prefix server https://heroku:$HEROKU_API_TOKEN@git.heroku.com/$HEROKU_APP_NAME.git master
+      run: git push https://heroku:$HEROKU_API_TOKEN@git.heroku.com/$HEROKU_APP_NAME.git `git subtree split --prefix server master`:master --force

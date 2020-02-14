@@ -1,4 +1,4 @@
-const baseUrl = `http://localhost:3001/reservations`;
+const baseUrl = process.env.NODE_ENV !== 'production' ? `http://localhost:3001/reservations` : 'https://inclusion-p2.herokuapp.com/reservations'
 
 export async function getFormattedReservations() {
   const result = await getReservations();

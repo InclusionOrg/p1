@@ -27,6 +27,7 @@ This boilerplate contains the following:
 3. `npx sequelize-cli db:seed:all`
 4. `npx nodemon`
 
+
 ## Database Setup
 
 This project uses Sequelize as an ORM. It was set up using the directions here: <https://sequelize.org/master/manual/migrations.html>. The easiest way to work with this set up is to use the generator that comes with `sequelize-cli`: <https://github.com/sequelize/cli#usage>.

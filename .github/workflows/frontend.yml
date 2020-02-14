@@ -1,0 +1,53 @@
+name: Build and Deploy Client
+on:
+  push:
+    branches:
+      - master
+jobs:
+  install-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.x]
+    steps:
+      - uses: actions/checkout@master
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@master
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install and Test
+        run: cd client && npm install && npm test
+        env:
+          CI: true
+
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Install Packages and Build
+        run: cd client && npm install && npm run build
+      - name: Deploy to GH Pages
+        run: |
+          git config --global user.email "isaac.kang@protonmail.ch"
+          git config --global user.name "Isaac Kang"
+          git remote set-url origin https://$ACCESS_TOKEN@github.com/InclusionOrg/project-1.git
+          cd client && npm run deploy
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
+      # - name: Deploy
+      #   uses: JamesIves/github-pages-deploy-action@master
+      #   env:
+      #     ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      #     BRANCH: master
+      #     FOLDER: client/build
+
+      # - name: Deploy
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   with:
+      #     # deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     # personal_token: ${{ secrets.ACCESS_TOKEN }}
+      #     publish_dir: ./client/build
