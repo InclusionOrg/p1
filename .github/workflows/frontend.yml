@@ -32,7 +32,7 @@ jobs:
         run: |
           git config --global user.email "isaac.kang@protonmail.ch"
           git config --global user.name "Isaac Kang"
-          git remote set-url origin https://$ACCESS_TOKEN@github.com/InclusionOrg/project-1.git
+          git remote set-url origin https://$ACCESS_TOKEN@github.com/InclusionOrg/p1.git
           cd client && npm run deploy
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
