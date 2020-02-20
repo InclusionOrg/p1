@@ -40,3 +40,9 @@ client tests:
 cd client
 npm test
 ```
+
+## gh-pages
+
+create a github personal access token in github user settings > personal access tokens
+
+copy/paste the personal access token value in github repo settings > secrets as `ACCESS_TOKEN`, so github actions has access to it
